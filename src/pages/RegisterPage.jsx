@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { RegisterApi } from '../services/Api'
 import { isAuthenticated } from '../services/Auth'
 import { storeUserData } from '../services/Storage'
@@ -37,7 +37,7 @@ export default function RegisterPage(){
 
         if(!hashError){
             setLoading(true);
-            //sending api
+            //sending register api
             RegisterApi(inputs).then((response)=>{
                 storeUserData(response.data.idToken);
             }).catch((err)=>{
@@ -70,7 +70,6 @@ export default function RegisterPage(){
     if(isAuthenticated()){
         //redirect user to dashboard
         return <Navigate to="/dashboard"/>
-
     }
 
 
@@ -119,7 +118,7 @@ export default function RegisterPage(){
                         </div>
                         <div className="clearfix"></div>
                         <div className="form-group">
-                        Already have account ? Please <a href="#">Login</a>
+                        Already have account ? Please <Link to="/login">Login</Link>
                         </div>
                     </form>
                 </div>
